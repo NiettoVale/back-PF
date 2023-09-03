@@ -6,7 +6,7 @@ const SizeModel = require("./models/Size");
 const UserModel = require("./models/User");
 
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`,
+  "postgresql://postgres:3Np1iaw5tEdlAXEwKiVG@containers-us-west-166.railway.app:5846/railway",
   {
     logging: false,
   }
