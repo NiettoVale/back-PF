@@ -4,17 +4,16 @@ const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Actualiza el campo 'eliminado' en lugar de eliminar físicamente
-    await Product.update(
-      { eliminado: true },
-      {
-        where: {
-          id,
-        },
-      }
-    );
+    const deleteProduct = await Product.findByPk(id);
 
-    return res.status(200).json({ message: "Prenda eliminada." });
+    if (deleteProduct) {
+      deleteProduct.delete = true;
+    }
+
+    if (deleteProduct.changed()) {
+      await deleteProduct.save();
+      return res.status(200).json({ message: "Prenda eliminada." });
+    }
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
